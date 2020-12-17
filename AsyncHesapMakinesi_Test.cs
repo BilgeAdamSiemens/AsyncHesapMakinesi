@@ -14,9 +14,15 @@ namespace AsyncHesapMakinesi_Test
         }
 
         [Test]
-        public async void AsyncHesapMakinesi_IslemDogrumu_ReturnsTrue()
+        [TestCase(10, 30, '+', 30)]
+        [TestCase(30, 30, '-', 0)]
+        [TestCase(12, 30, '*', 360)]
+        [TestCase(20, 5, '/', 4)]
+        public async Task AsyncHesapMakinesi_DegiskenlerVeriliyor_ReturnsTrue()
         {
-            await Assert.That(Is.EqualTo((object).'+'));
+            // Act
+            
+            // Assert
         }
     }
 }
