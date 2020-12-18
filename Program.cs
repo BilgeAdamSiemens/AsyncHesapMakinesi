@@ -6,69 +6,77 @@ using System.Threading.Tasks;
 
 namespace AsyncHesapMakinesi
 {
-    class Program
+    // HesapMakinesi sınıfının öğeleri ve metodları.
+    public class HesapMakinesi
     {
-        // HesapMakinesi sınıfının öğeleri ve metodları.
-        public class HesapMakinesi
+        public static double Sayi1 { get; set; }
+        public static double Sayi2 { get; set; }
+        public static char Islem { get; set; }
+        public static Task<double> Sonuc { get; set; }
+
+        public HesapMakinesi(double sayi1, double sayi2, char islem, Task<double> sonuc)
         {
-            public static double Sayi1 { get; set; }
-            public static double Sayi2 { get; set; }
-            public static char Islem { get; set; }
-            public static Task<double> Sonuc { get; set; }
-
-            static async Task<double> AsyncToplama(double _sayi1, double _sayi2)
-            {
-                var sonuc = await Task.Run(() => (_sayi1 + _sayi2));
-                Console.WriteLine($"{_sayi1} + {_sayi2} = {sonuc}");
-                return sonuc;
-            }
-            static async Task<double> AsyncCikarma(double _sayi1, double _sayi2)
-            {
-                var sonuc = await Task.Run(() => (_sayi1 - _sayi2));
-                Console.WriteLine($"{_sayi1} - {_sayi2} = {sonuc}");
-                return sonuc;
-            }
-            static async Task<double> AsyncCarpma(double _sayi1, double _sayi2)
-            {
-                var sonuc = await Task.Run(() => (_sayi1 * _sayi2));
-                Console.WriteLine($"{_sayi1} * {_sayi2} = {sonuc}");
-                return sonuc;
-            }
-            static async Task<double> AsyncBolme(double _sayi1, double _sayi2)
-            {
-                var sonuc = await Task.Run(() => (_sayi1 / _sayi2));
-                Console.WriteLine($"{_sayi1} / {_sayi2} = {sonuc}");
-                return sonuc;
-            }
-
-            public static void AsyncIslem(char _islem)
-            {
-                switch (_islem)
-                {
-                    case '+':
-                        Sonuc = AsyncToplama(Sayi1, Sayi2);
-                        Sonuc.Wait();
-                        break;
-                    case '-':
-                        Sonuc = AsyncCikarma(Sayi1, Sayi2);
-                        Sonuc.Wait();
-                        break;
-                    case '*':
-                        Sonuc = AsyncCarpma(Sayi1, Sayi2);
-                        Sonuc.Wait();
-                        break;
-                    case '/':
-                        Sonuc = AsyncBolme(Sayi1, Sayi2);
-                        Sonuc.Wait();
-                        break;
-                    default:
-                        Sonuc = null;
-                        Console.WriteLine("Yanlış işlem!");
-                        break;
-                }
-            }
+            Sayi1 = sayi1;
+            Sayi2 = sayi2;
+            Islem = islem;
+            Sonuc = sonuc;
         }
 
+        static async Task<double> AsyncToplama(double _sayi1, double _sayi2)
+        {
+            var sonuc = await Task.Run(() => (_sayi1 + _sayi2));
+            Console.WriteLine($"{_sayi1} + {_sayi2} = {sonuc}");
+            return sonuc;
+        }
+        static async Task<double> AsyncCikarma(double _sayi1, double _sayi2)
+        {
+            var sonuc = await Task.Run(() => (_sayi1 - _sayi2));
+            Console.WriteLine($"{_sayi1} - {_sayi2} = {sonuc}");
+            return sonuc;
+        }
+        static async Task<double> AsyncCarpma(double _sayi1, double _sayi2)
+        {
+            var sonuc = await Task.Run(() => (_sayi1 * _sayi2));
+            Console.WriteLine($"{_sayi1} * {_sayi2} = {sonuc}");
+            return sonuc;
+        }
+        static async Task<double> AsyncBolme(double _sayi1, double _sayi2)
+        {
+            var sonuc = await Task.Run(() => (_sayi1 / _sayi2));
+            Console.WriteLine($"{_sayi1} / {_sayi2} = {sonuc}");
+            return sonuc;
+        }
+
+        public static void AsyncIslem(char _islem)
+        {
+            switch (_islem)
+            {
+                case '+':
+                    Sonuc = AsyncToplama(Sayi1, Sayi2);
+                    Sonuc.Wait();
+                    break;
+                case '-':
+                    Sonuc = AsyncCikarma(Sayi1, Sayi2);
+                    Sonuc.Wait();
+                    break;
+                case '*':
+                    Sonuc = AsyncCarpma(Sayi1, Sayi2);
+                    Sonuc.Wait();
+                    break;
+                case '/':
+                    Sonuc = AsyncBolme(Sayi1, Sayi2);
+                    Sonuc.Wait();
+                    break;
+                default:
+                    Sonuc = null;
+                    Console.WriteLine("Yanlış işlem!");
+                    break;
+            }
+        }
+    }
+
+    class Program
+    {
         static void Main(string[] args)
         {
             // Static 
